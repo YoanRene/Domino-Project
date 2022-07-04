@@ -4,5 +4,5 @@ This project have as a principal goal to represent different kinds of domino gam
 I hope you enjoy to play it.      ;)
 
 ### Contributors
-* Yoan Rene Ramos Corrales 
+* Yoan Rene Ramos Corrales (@YoanRene)
 * Carla Sunami Perez Valera
