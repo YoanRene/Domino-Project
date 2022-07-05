@@ -5,4 +5,4 @@ I hope you enjoy to play it.      ;)
 
 ### Contributors
 * Yoan Rene Ramos Corrales (@YoanRene)
-* Carla Sunami Perez Valera
+* Carla Sunami Perez Valera (@carlapvalera)
