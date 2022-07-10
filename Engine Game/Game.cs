@@ -11,7 +11,7 @@ public class Game
     public ITokensGenerator Generator { get; }
     public IActionModeratorToAdd ActionModeratorToAdd { get; }
     public IActionModeratorToSub ActionModeratorToSub { get; }
-    public IStep Steps;
+    public IStep Steps { get; }
     public Table Table_{ get; private set; }
     public List<Player> Players { get; private set; }
     public Game(IDistribution distribution,IEndGame endGame,
