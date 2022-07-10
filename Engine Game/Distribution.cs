@@ -1,7 +1,12 @@
 ﻿namespace Project;
 
-class ClassicDistributionTen : ObjectWithRandom,IDistribution
+public class ClassicDistributionTen : ObjectWithRandom,IDistribution
 {
+    public string Print()
+    {
+        return "Classic Ten";
+    }
+
     public void ToDistribute(Game game)
     {
         for (int i = 0; i < game.Players.Count; i++)
@@ -13,8 +18,13 @@ class ClassicDistributionTen : ObjectWithRandom,IDistribution
             }
     }
 }
-class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
+public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
 {
+    public string Print()
+    {
+        return "Doubles To Trash";
+    }
+
     public void ToDistribute(Game game)
     {
         ClassicDistributionTen classicDistribution = new();

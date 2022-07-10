@@ -1,47 +1,52 @@
 namespace Project;
 
-public interface IStrategy// interface que define las estrategias de cada jugador
+public interface IStrategy:IPrinteable// interface que define las estrategias de cada jugador
 {
-    Token TokenToPlay(List<Token> itIsOkPlayed, Player player, int cursor, Table table  );
+    Token TokenToPlay(List<Token> itIsOkPlayed, Player player, int nextPlayerCursor, Table table  );
     //metodo que define la pieza a jugar por el jugador que utilice esta estrategia
 }
-public interface ITokensGenerator
+public interface ITokensGenerator:IPrinteable
 {
+    Dictionary<int,(int,int)> Stats();
     List<Token> Generated();
 }
-interface IEndGame
+public interface IEndGame:IPrinteable
 {
     bool IsEndGame(Game game);
 }
-interface IEndRound
+public interface IEndRound:IPrinteable
 {
     bool IsEndRound(Game game);
 }
-interface IFirstPlayer// define las distintas formas de empezar el juego
+public interface IFirstPlayer:IPrinteable// define las distintas formas de empezar el juego
 {
     int IndexFirstPlayer(Game game);// llama al primer jugador a jugar
 }
-interface IScoreCalculator
+public interface IScoreCalculator:IPrinteable
 {
     void ToCalculateScore(Game game);
 }
-interface IDistribution
+public interface IDistribution:IPrinteable
 {
     void ToDistribute(Game game);
 }
-interface IMove
+public interface IMove:IPrinteable
 {
     List<Token> ItIsAOkPlayed(List<Token> hand);
 }
-interface IActionModeratorToAdd
+public interface IActionModeratorToAdd:IPrinteable
 {
     List<Token> TokensToAddThatItIsOk();// en el caso que las fichas se puedan jugar en cualquier momento del juego
 }
-interface IActionModeratorToSub
+public interface IActionModeratorToSub:IPrinteable
 {
     List<Token> TokensToSubThatItIsNotOk();// en el caso que las fichas no se puedan jugar en juego
 }
-interface IStep
+public interface IStep:IPrinteable
 {
     int IndexNextPlayer(Game game);
+}
+public interface IPrinteable
+{
+    string Print();
 }

@@ -1,5 +1,5 @@
 ﻿namespace Project;
-class TwicePassesEndGame : IEndGame
+public class TwicePassesEndGame : IEndGame
 {
     public bool IsEndGame(Game game)
     {
@@ -8,8 +8,13 @@ class TwicePassesEndGame : IEndGame
                 return true;
         return false;
     }
+
+    public string Print()
+    {
+        return "Twice Passes";
+    }
 }
-class ClassicEndRound : IEndRound
+public class ClassicEndRound : IEndRound
 {
     public bool IsEndRound(Game game)
     {
@@ -25,16 +30,26 @@ class ClassicEndRound : IEndRound
             return true;
         return false;
     }
+
+    public string Print()
+    {
+        return "Classic";
+    }
 }
-class ClassicEndGame : IEndGame
+public class ClassicEndGame : IEndGame
 {
     public bool IsEndGame(Game game)//revisar el metodo el ultimo false
     {
         return game.IsEndRound_;
     }
+
+    public string Print()
+    {
+        return "Classic";
+    }
 }
 
-class ChickenEndGame : IEndGame
+public class ChickenEndGame : IEndGame
 {
     public bool IsEndGame(Game game)
     {
@@ -42,5 +57,10 @@ class ChickenEndGame : IEndGame
             if (player.ScoreGame >= 100)
                 return true;
         return false;
+    }
+
+    public string Print()
+    {
+        return "Chicken";
     }
 }

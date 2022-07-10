@@ -39,17 +39,17 @@
 
             return total;
         }
-        public static List<int> SmartValuesToPlay(List<Token> itIsOkPlayed, Table table)
+        public static List<int> ValuesToPlay(List<Token> itIsOkPlayed, Table table)
         {
-            List<int> smartValuesToPlay = new();
+            List<int> valuesToPlay = new();
             
             for (int i = 0; i < itIsOkPlayed.Count; i++)
                 if (table.Right == itIsOkPlayed[i].Left || table.Left == itIsOkPlayed[i].Left)
-                    smartValuesToPlay.Add(itIsOkPlayed[i].Right);
+                    valuesToPlay.Add(itIsOkPlayed[i].Right);
                 else
-                    smartValuesToPlay.Add(itIsOkPlayed[i].Left);
+                    valuesToPlay.Add(itIsOkPlayed[i].Left);
 
-            return smartValuesToPlay;
+            return valuesToPlay;
         }
         public static List<Token> WinnerTokens(List<Token> itIsOkPlayed, List<int> smartValuesToPlay, Player player, int cursor, Table table)
         {

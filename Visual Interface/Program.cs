@@ -1,9 +1,13 @@
-﻿namespace Project;
+﻿using Project;
+
+namespace Visual_Interface;
 
 class Program
 {
     static void Main (string[] args)
     {
-        Console.WriteLine("Hell");
+
+        MainForm mainForm = new MainForm();
+        mainForm.Show();
     }
 }

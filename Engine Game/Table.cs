@@ -1,7 +1,7 @@
 namespace Project;
 public class Table
 {
-    public int[] Stats { get; set; }
+    public Dictionary<int,(int,int)> Stats { get; }
     public bool IsStart { get { return TokensInGame.Count == 0; } }
     public List<Token> TokensInGame { get; set; } = new();
     public List<Token> TokensOutGame { get; set; } = new();
@@ -15,7 +15,11 @@ public class Table
         get { return !IsStart ? TokensInGame[TokensInGame.Count - 1].Right : -1; }
     }
 
-    public Table() { }
+    public Table(ITokensGenerator generator) 
+    {
+        TokensTotal = generator.Generated();
+        Stats = generator.Stats();
+    }
 
     public void Eject(Token token)
     {
@@ -27,8 +31,13 @@ public class Table
         if (token == null) return;
         if (IsStart || token.Right == Left || token.Left == Right || hasBeenTurned)
         {
-            Stats[token.Left]++;
-            Stats[token.Right]++;
+            if (token.IsDouble)
+                Stats[token.Left] = (Stats[token.Left].Item1 + 1, Stats[token.Left].Item2);
+            else
+            {
+                Stats[token.Left] = (Stats[token.Left].Item1 + 1, Stats[token.Left].Item2);
+                Stats[token.Right] = (Stats[token.Right].Item1 + 1, Stats[token.Right].Item2);
+            }
             if (TokensInGame.Count == 0 || token.Right == Left)
                 ToLeft(token);
             else if (token.Left == Right)
@@ -50,5 +59,14 @@ public class Table
     public void ToRight(Token piece)
     {
         TokensInGame.Add(piece);
+    } 
+    public override string ToString()
+    {
+        string toString = "";
+        for (int i = 0; i < TokensInGame.Count; i++)
+        {
+            toString+=TokensInGame[i]+" ";
+        }
+        return toString;
     }
 }

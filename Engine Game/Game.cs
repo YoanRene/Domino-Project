@@ -1,5 +1,5 @@
 ﻿namespace Project;
-class Game
+public class Game
 {
     public int Cursor { get; private set; } = -1;
     public IDistribution Distribution { get; }
@@ -8,6 +8,7 @@ class Game
     public IEndRound EndRound { get; }
     public IScoreCalculator ScoreCalculator { get; }
     public IFirstPlayer FirstPlayer { get; }
+    public ITokensGenerator Generator { get; }
     public IActionModeratorToAdd ActionModeratorToAdd { get; }
     public IActionModeratorToSub ActionModeratorToSub { get; }
     public IStep Steps;
@@ -17,7 +18,8 @@ class Game
                 IEndRound endRound,IScoreCalculator scoreCalculator,
                 IFirstPlayer firstPlayer, IStep steps,
                 IActionModeratorToAdd actionModeratorToAdd,
-                IActionModeratorToSub actionModeratorToSub,List<Player> players)
+                IActionModeratorToSub actionModeratorToSub, 
+                ITokensGenerator generator, List<Player> players)
     {
         Steps = steps;
         Distribution = distribution;
@@ -28,7 +30,8 @@ class Game
         ActionModeratorToAdd = actionModeratorToAdd;
         ActionModeratorToSub = actionModeratorToSub;
         Players = players;
-        Table_ = new Table();
+        Generator = generator;
+        Table_ = new Table(Generator);
     }
     public bool Play(IStrategy strategy)
     {
@@ -44,7 +47,7 @@ class Game
         {
             if (IsEndRound_)
             {
-                Table_ = new Table();
+                Table_ = new Table(Generator);
                 return true;
             }
             BasicPlay(strategy);
@@ -56,10 +59,10 @@ class Game
 
     public void BasicPlay(IStrategy strategy)
     {
-        int next = Steps.IndexNextPlayer(this);
         Player currentPlayer = Players[Cursor];
+        Cursor = Steps.IndexNextPlayer(this);
         List<Token> tokensToPlay = Auxiliar.ValidTokensToPlay(currentPlayer.Hand, ActionModeratorToAdd, ActionModeratorToSub, Table_);
-        Token tokenToPlay = Players[Cursor].Play(next, Table_, tokensToPlay, strategy);
+        Token tokenToPlay = Players[Cursor].Play(Cursor, Table_, tokensToPlay, strategy);
         currentPlayer.Hand.Remove(tokenToPlay);
         Table_.Eject(tokenToPlay);
         ScoreCalculator.ToCalculateScore(this);

@@ -1,6 +1,11 @@
 namespace Project;
-class DoubleWhiteActionToAdd : IActionModeratorToAdd
+public class DoubleWhiteActionToAdd : IActionModeratorToAdd
 {
+    public string Print()
+    {
+        return "Double White is a Valid Token always";
+    }
+
     public List<Token> TokensToAddThatItIsOk()
     {
         List<Token> TokensToAdd=new List<Token>();
@@ -8,15 +13,25 @@ class DoubleWhiteActionToAdd : IActionModeratorToAdd
         return TokensToAdd;
     }
 }
-public class ClassicActionToAdd : IActionModeratorToAdd// implemetacion de la interface
+public class ClassicActionToAdd : IActionModeratorToAdd// implementacion de la interface
 {
+    public string Print()
+    {
+        return "Classic";
+    }
+
     public List<Token> TokensToAddThatItIsOk()
     {
         return new List<Token>();
     }
 }
-class ClassicActionToSub : IActionModeratorToSub
+public class ClassicActionToSub : IActionModeratorToSub
 {
+    public string Print()
+    {
+        return "Classic";
+    }
+
     public List<Token> TokensToSubThatItIsNotOk()
     {
         return new List<Token>();
