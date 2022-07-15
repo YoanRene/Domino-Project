@@ -4,7 +4,6 @@ public class Table
     public Dictionary<int,(int,int)> Stats { get; }
     public bool IsStart { get { return TokensInGame.Count == 0; } }
     public List<Token> TokensInGame { get; set; } = new();
-    public List<Token> TokensOutGame { get; set; } = new();
     public List<Token> TokensTotal { get; set; } = new();
     public int Left
     {

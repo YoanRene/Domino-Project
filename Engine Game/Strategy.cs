@@ -80,7 +80,7 @@ public class IntelligentStrategy : IStrategy
         if (smartTokens.Count > 0)
             return smartTokens[0];
 
-        int piecesNotGame = table.TokensOutGame.Count;
+        int piecesNotGame = table.TokensTotal.Count - table.TokensInGame.Count;
 
         Dictionary<int, (int, int)> statsAux = table.Stats;
         for (int i = 0; i < player.Hand.Count; i++)

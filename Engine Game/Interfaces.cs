@@ -27,7 +27,7 @@ public interface IScoreCalculator:IPrinteable
 }
 public interface IDistribution:IPrinteable
 {
-    void ToDistribute(Game game);
+    void ToDistribute(List<Token> tokens,List<Player> players);
 }
 public interface IMove:IPrinteable
 {

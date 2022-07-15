@@ -7,14 +7,14 @@ public class ClassicDistributionTen : ObjectWithRandom,IDistribution
         return "Classic Ten";
     }
 
-    public void ToDistribute(Game game)
+    public void ToDistribute(List<Token> tokens,List<Player> players)
     {
-        for (int i = 0; i < game.Players.Count; i++)
+        for (int i = 0; i < players.Count; i++)
             for (int j = 0; j < 10; j++)
             {
-                Token token = game.Table_.TokensTotal[Random_.Next(0, game.Table_.TokensTotal.Count)];
-                game.Table_.TokensTotal.Remove(token);
-                game.Players[i].Hand.Add(token);
+                Token token = tokens[Random_.Next(0, tokens.Count)];
+                tokens.Remove(token);
+                players[i].Hand.Add(token);
             }
     }
 }
@@ -25,12 +25,12 @@ public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
         return "Doubles To Trash";
     }
 
-    public void ToDistribute(Game game)
+    public void ToDistribute(List<Token> tokens,List<Player> players)
     {
         ClassicDistributionTen classicDistribution = new();
-        classicDistribution.ToDistribute(game);
+        classicDistribution.ToDistribute(tokens,players);
       
-        foreach (var player in game.Players)
+        foreach (var player in players)
         {
             List<Token> doubleTokens = new List<Token>();
             foreach (var token in player.Hand)
@@ -40,19 +40,19 @@ public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
             {
                 for (int i = 0; i < doubleTokens.Count; i++)
                 {
-                    game.Table_.TokensTotal.Add(doubleTokens[i]);
+                    tokens.Add(doubleTokens[i]);
                     player.Hand.Remove(doubleTokens[i]);
                 }
-                ToDistributeRandomForOne(game, player, doubleTokens.Count);
+                ToDistributeRandomForOne(tokens, player, doubleTokens.Count);
             }
         }
     }
 
-    void ToDistributeRandomForOne(Game game,Player player,int count)
+    void ToDistributeRandomForOne(List<Token> tokens,Player player,int count)
     {
         for (int i = 0; i < count; i++)
         {
-            Token token = game.Table_.TokensTotal[Random_.Next(0, game.Table_.TokensTotal.Count)];
+            Token token = tokens[Random_.Next(0, tokens.Count)];
             player.Hand.Add(token);
         }
     }
