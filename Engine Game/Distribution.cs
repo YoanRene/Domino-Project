@@ -4,17 +4,20 @@ public class ClassicDistributionTen : ObjectWithRandom,IDistribution
 {
     public string Print()
     {
-        return "Classic Ten";
+        return "Classic";
     }
 
-    public void ToDistribute(List<Token> tokens,List<Player> players)
+    public void ToDistribute(List<Token> tokens,List<Player> players,int count)
     {
         for (int i = 0; i < players.Count; i++)
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < count; j++)
             {
-                Token token = tokens[Random_.Next(0, tokens.Count)];
-                tokens.Remove(token);
-                players[i].Hand.Add(token);
+                if (tokens.Count > 0)
+                {
+                    Token token = tokens[Random_.Next(0, tokens.Count)];
+                    tokens.Remove(token);
+                    players[i].Hand.Add(token);
+                }
             }
     }
 }
@@ -25,10 +28,10 @@ public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
         return "Doubles To Trash";
     }
 
-    public void ToDistribute(List<Token> tokens,List<Player> players)
+    public void ToDistribute(List<Token> tokens,List<Player> players,int count)
     {
         ClassicDistributionTen classicDistribution = new();
-        classicDistribution.ToDistribute(tokens,players);
+        classicDistribution.ToDistribute(tokens,players,count);
       
         foreach (var player in players)
         {

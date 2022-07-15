@@ -43,7 +43,7 @@ public class Game
         if (Table_.IsStart)
         {
             Log.Add("Start\n");
-            Distribution.ToDistribute(Table_.TokensTotal,Players);
+            Distribution.ToDistribute(Table_.TokensTotal,Players,Table_.Stats.Count);
             Log.Add("Distribution of Tokens\n");
             Cursor = FirstPlayer.IndexFirstPlayer(this);
             Log.Add("The first selected player is " + Players[Cursor].Name+'\n');
