@@ -11,6 +11,7 @@ namespace Visual_Interface
     {
         public Game Game_ { get; }
         IStrategy[] Strategies { get; }
+        bool PlayToTheEnd { get; set; } = false;
 
         public GameForm(List<IPrinteable> printeables, List<Player> players)
         {
@@ -23,6 +24,7 @@ namespace Visual_Interface
                                           new IntelligentRandomStrategy(),
                                           new BotagordaStrategy(),
                                           new RandomStrategy()};
+           
         }
         public void Show()
         {
@@ -67,7 +69,11 @@ namespace Visual_Interface
 
             bool strategyIsSelected = false;
             IStrategy strategy = new RandomStrategy();
-            string key = Console.ReadLine();
+            string key = (Strategies.Length + 1).ToString();
+            if (!PlayToTheEnd)
+                key = Console.ReadLine();
+            else
+                Thread.Sleep(1000);
             for (int i = 0; i < Strategies.Length; i++)
             {
                 if ((i + 1).ToString() == key)
@@ -77,23 +83,12 @@ namespace Visual_Interface
                     break;
                 }
             }
-            if (strategyIsSelected || (Strategies.Length + 1).ToString() == key)
-            {
-                bool arePlaying=Game_.Play(strategy);
-                if(arePlaying)
-                    Show();
-                else
-                {
-                    LogForm logForm = new LogForm(this);
-                    logForm.Show();
-                }
-            }
+            if (strategyIsSelected)
+                Auxiliar_(strategy);
             else if ((Strategies.Length + 1).ToString() == key)
             {
-                while (Game_.Play(strategy))
-                {
-                    Thread.Sleep(1000);
-                }
+                PlayToTheEnd = true;
+                Auxiliar_(strategy);
             }
             else if ((Strategies.Length + 2).ToString() == key)
             {
@@ -109,6 +104,17 @@ namespace Visual_Interface
             {
                 MainForm.KeyIncorrect();
                 Show();
+            }
+        }
+        public void Auxiliar_(IStrategy strategy)
+        {
+            bool arePlaying = Game_.Play(strategy);
+            if (arePlaying)
+                Show();
+            else
+            {
+                LogForm logForm = new LogForm(this);
+                logForm.Show();
             }
         }
     }
