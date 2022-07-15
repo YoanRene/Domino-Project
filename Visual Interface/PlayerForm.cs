@@ -17,7 +17,10 @@ namespace Visual_Interface
         public void Show()
         {
             Console.Clear();
-            Console.WriteLine("How many players do you want ? (1<=x<=8)"); 
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("How many players do you want?");
+            Console.ResetColor();
+            Console.WriteLine(" (1 <= x <= 8)");
 
             string key = Console.ReadLine();
             bool isOkKey = false;
