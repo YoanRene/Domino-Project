@@ -6,7 +6,6 @@ class Program
 {
     static void Main (string[] args)
     {
-
         MainForm mainForm = new MainForm();
         mainForm.Show();
     }

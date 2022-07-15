@@ -15,9 +15,10 @@ public class ClassicStep : IStep
 }
 public class ChangeDirectionWithPassStep : IStep
 {
+    public bool toLeft { get; private set; } = false;
     public int IndexNextPlayer(Game game)
     {
-        if (game.Players[game.Cursor].CountIsContiniousPassed > 0)
+        if(game.CountPasses%2!=0)
             return (game.Cursor - 1 + game.Players.Count) % game.Players.Count;
         ClassicStep classicStep = new();
         return classicStep.IndexNextPlayer(game);

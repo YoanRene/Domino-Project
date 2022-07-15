@@ -7,18 +7,18 @@ using Project;
 
 namespace Visual_Interface
 {
-    class GameForm:IForm
+    class GameForm : IForm
     {
-        Game game { get; }
-        IStrategy[] strategies { get; }
+        public Game Game_ { get; }
+        IStrategy[] Strategies { get; }
 
-        public GameForm(List<IPrinteable> printeables,List<Player> players)
+        public GameForm(List<IPrinteable> printeables, List<Player> players)
         {
-            game = new Game((IDistribution)printeables[0], (IEndGame)printeables[1], (IEndRound)printeables[2], 
+            Game_ = new Game((IDistribution)printeables[0], (IEndGame)printeables[1], (IEndRound)printeables[2],
                             (IScoreCalculator)printeables[3], (IFirstPlayer)printeables[4],
-                            (IStep)printeables[5], (IActionModeratorToAdd)printeables[6], 
-                            (IActionModeratorToSub)printeables[7],(ITokensGenerator)printeables[8], players);
-            strategies = new IStrategy[] {new IntelligentStrategy(),
+                            (IStep)printeables[5], (IActionModeratorToAdd)printeables[6],
+                            (IActionModeratorToSub)printeables[7], (ITokensGenerator)printeables[8], players);
+            Strategies = new IStrategy[] {new IntelligentStrategy(),
                                           new IntelligentBotagordaStrategy(),
                                           new IntelligentRandomStrategy(),
                                           new BotagordaStrategy(),
@@ -27,54 +27,87 @@ namespace Visual_Interface
         public void Show()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("What strategy do you want to play now?");
-            for (int i = 0; i < strategies.Length; i++)
-            {
-                Console.WriteLine(i+1+" - "+strategies[i].Print());
-            }
+            Console.ResetColor();
+            for (int i = 0; i < Strategies.Length; i++)
+                Console.WriteLine(i + 1 + " - " + Strategies[i].Print());
 
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Other Options:");
-            Console.WriteLine(strategies.Length+1+" - Play Random To The End");
-            Console.WriteLine(strategies.Length+2+" - Back");
+            Console.ResetColor();
+            Console.WriteLine(Strategies.Length + 1 + " - Play Random To The End");
+            Console.WriteLine(Strategies.Length + 2 + " - Log");
+            Console.WriteLine(Strategies.Length + 3 + " - Back");
             Console.WriteLine();
-            Console.WriteLine(game.Table_);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(Game_.Table_);
+            Console.ResetColor();
+            Console.WriteLine();
+
+            if (Game_.Log.Count > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(Game_.Log[Game_.Log.Count - 1]);
+                Console.ResetColor();
+            }
+
+            for (int i = 0; i < Game_.Players.Count; i++)
+            {
+                Console.Write(Game_.Players[i].Name + ": ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                for (int j = 0; j < Game_.Players[i].Hand.Count; j++)
+                {
+                    Console.Write(Game_.Players[i].Hand[j]);
+                }
+                Console.ResetColor();
+                Console.WriteLine();
+            }
 
             bool strategyIsSelected = false;
             IStrategy strategy = new RandomStrategy();
             string key = Console.ReadLine();
-            for (int i = 0; i < strategies.Length; i++)
+            for (int i = 0; i < Strategies.Length; i++)
             {
-                if((i+1).ToString()==key)
+                if ((i + 1).ToString() == key)
                 {
                     strategyIsSelected = true;
-                    strategy = strategies[i];
+                    strategy = Strategies[i];
                     break;
                 }
             }
-            if (strategyIsSelected|| (strategies.Length + 1).ToString() == key)
+            if (strategyIsSelected || (Strategies.Length + 1).ToString() == key)
             {
-                if(game.Play(strategy))
+                bool arePlaying=Game_.Play(strategy);
+                if(arePlaying)
                     Show();
+                else
+                {
+                    LogForm logForm = new LogForm(this);
+                    logForm.Show();
+                }
             }
-            else if((strategies.Length + 1).ToString() == key)
+            else if ((Strategies.Length + 1).ToString() == key)
             {
-                while (game.Play(strategy))
+                while (Game_.Play(strategy))
                 {
                     Thread.Sleep(1000);
                 }
             }
-            else if((strategies.Length + 2).ToString() == key)
+            else if ((Strategies.Length + 2).ToString() == key)
+            {
+                LogForm logForm = new LogForm(this);
+                logForm.Show();
+            }
+            else if ((Strategies.Length + 3).ToString() == key)
             {
                 MainForm mainForm = new MainForm();
                 mainForm.Show();
             }
             else
             {
-                Console.Clear();
-                Console.WriteLine("The key is incorrect");
-                Console.WriteLine("Try Again");
-                Thread.Sleep(2000);
+                MainForm.KeyIncorrect();
                 Show();
             }
         }

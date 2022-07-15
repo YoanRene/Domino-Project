@@ -2,6 +2,17 @@
 {
     static class Auxiliar
     {
+        public static void ScoreCalculate(Func<int, int, bool> func, Game game)
+        {
+            double[] score = new double[game.Players.Count];
+            for (int i = 0; i < game.Players.Count; i++)
+                for (int j = 0; j < game.Players[i].Hand.Count; j++)
+                {
+                    if (func(i, j))
+                        game.Players[i].ScoreGame += game.Players[i].Hand[j].Right + game.Players[i].Hand[j].Left;
+                    game.Players[i].ScoreGame += game.Players[i].Hand[j].Right + game.Players[i].Hand[j].Left;
+                }
+        }
         public static List<Token> ValidTokensToPlay(List<Token> hand, IActionModeratorToAdd actionModeratorToAdd, IActionModeratorToSub actionModeratorToSub, Table table)
         {
             HashSet<Token> okPlayed = new HashSet<Token>();
@@ -15,13 +26,17 @@
                     okPlayed.Add(hand[i]);
 
             List<Token> tokensToAdd = actionModeratorToAdd.TokensToAddThatItIsOk();
+
             foreach (var token in tokensToAdd)
-                okPlayed.Add(token);
+            {
+                if (hand.Contains(token))
+                    okPlayed.Add(token);
+            }
 
             List<Token> tokensToSub = actionModeratorToSub.TokensToSubThatItIsNotOk();
             foreach (var token in okPlayed)
                 foreach (var token1 in tokensToSub)
-                    if (token == token1)
+                    if (token.Equals(token1))
                     {
                         okPlayed.Remove(token);
                         break;
@@ -42,7 +57,7 @@
         public static List<int> ValuesToPlay(List<Token> itIsOkPlayed, Table table)
         {
             List<int> valuesToPlay = new();
-            
+
             for (int i = 0; i < itIsOkPlayed.Count; i++)
                 if (table.Right == itIsOkPlayed[i].Left || table.Left == itIsOkPlayed[i].Left)
                     valuesToPlay.Add(itIsOkPlayed[i].Right);

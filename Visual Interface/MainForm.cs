@@ -13,20 +13,33 @@ namespace Visual_Interface
     }
     class MainForm : IForm
     {
-        IDistribution[] distributions;
-        
+        (string,IPrinteable[])[] Printeables;
         public MainForm()
         {
-            distributions = new IDistribution[] { new ClassicDistributionTen(),new DoublesToTrashDistribution()};
+            Printeables = new (string,IPrinteable[])[]{
+                    ("Distribution",new IDistribution[] { new ClassicDistributionTen(),new DoublesToTrashDistribution()}),
+                    ("End Game",new IEndGame[] { new ClassicEndGame(), new ChickenEndGame(), new TwicePassesEndGame()}),
+                    ("End Round",new IEndRound[] {new ClassicEndRound()}),
+                    ("Score Calculator",new IScoreCalculator[]{new ScoreCalculatorA(),new ScoreCalculatorB()}),
+                    ("First PLayer",new IFirstPlayer[]{new FirstPlayerA()}),
+                    ("Steps",new IStep[]{ new ClassicStep(), new ChangeDirectionWithPassStep()}),
+                    ("Action Moderator To Add",new IActionModeratorToAdd[]{new ClassicActionToAdd(),new DoubleWhiteActionToAdd()}),
+                    ("Action Moderator To Sub",new IActionModeratorToSub[]{new ClassicActionToSub()}),
+                    ("Variant",new ITokensGenerator[]{ new Generator_9_Variant(),new Generator_6_Variant()})
+            };
+            
         }
         public void Show()
         {
             Console.Clear();
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine(" ||||     ||||||    ||||  ||||    |||    ||||  ||    ||||||");
             Console.WriteLine(" ||  ||   ||  ||    || |||| ||    |||    || || ||    ||  ||");
             Console.WriteLine(" ||||     ||||||    ||  ||  ||    |||    ||  ||||    ||||||");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine();
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             Console.ResetColor();
 
             Console.WriteLine();
@@ -35,49 +48,33 @@ namespace Visual_Interface
 
             string key = Console.ReadLine();
 
-            List<Player> players = new List<Player>();
-            players.Add(new Player("Player1", new List<Player>()));
-            players.Add(new Player("Player2", new List<Player>()));
-            players.Add(new Player("Player3", new List<Player>()));
-            players.Add(new Player("Player4", new List<Player>()));
-
-            List<IPrinteable> printeables = new List<IPrinteable>();
+            List<IPrinteable> printeablesToPlay = new List<IPrinteable>();
 
             if (key == "1")
             {
-                //(IDistribution)printeables[0], (IEndGame)printeables[1], (IEndRound)printeables[2], 
-                //            (IScoreCalculator)printeables[3], (IFirstPlayer)printeables[4],
-                //            (IStep)printeables[5], (IActionModeratorToAdd)printeables[6], 
-                //            (IActionModeratorToSub)printeables[7], players);
-
-                printeables.Add(new ClassicDistributionTen());
-                printeables.Add(new ClassicEndGame());
-                printeables.Add(new ClassicEndRound());
-                printeables.Add(new ScoreCalculatorA());
-                printeables.Add(new FirstPlayerA());
-                printeables.Add(new ClassicStep());
-                printeables.Add(new ClassicActionToAdd());
-                printeables.Add(new ClassicActionToSub());
-                printeables.Add(new Generator_9_Variant());
-
-                GameForm gameForm = new GameForm(printeables, players);
+                for (int i = 0; i < Printeables.Length; i++)
+                    printeablesToPlay.Add(Printeables[i].Item2[0]);
+                GameForm gameForm = new GameForm(printeablesToPlay, PlayerForm.CreationOfPlayers(4));
                 gameForm.Show();
             }
 
             else if (key == "2")
             {
-                DistributionForm distributionForm = new DistributionForm(printeables, distributions);
+                ItemToSelectForm distributionForm = new ItemToSelectForm(printeablesToPlay, Printeables,0);
                 distributionForm.Show();
             }
             else
             {
-                Console.Clear();
-                Console.WriteLine("The key is incorrect");
-                Console.WriteLine("Try Again");
-                Thread.Sleep(2000);
+                KeyIncorrect();
                 Show();
             }
-
+        }
+        public static void KeyIncorrect()
+        {
+            Console.Clear();
+            Console.WriteLine("The key is incorrect");
+            Console.WriteLine("Try Again");
+            Thread.Sleep(2000);
         }
     }
 }

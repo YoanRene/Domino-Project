@@ -12,11 +12,11 @@ public interface ITokensGenerator:IPrinteable
 }
 public interface IEndGame:IPrinteable
 {
-    bool IsEndGame(Game game);
+    (bool,List<Player>) IsEndGame(Game game);
 }
 public interface IEndRound:IPrinteable
 {
-    bool IsEndRound(Game game);
+    (bool,List<Player>) IsEndRound(Game game);
 }
 public interface IFirstPlayer:IPrinteable// define las distintas formas de empezar el juego
 {
