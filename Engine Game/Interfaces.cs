@@ -1,9 +1,8 @@
 namespace Project;
 
-public interface IStrategy:IPrinteable// interface que define las estrategias de cada jugador
+public interface IStrategy:IPrinteable
 {
     Token TokenToPlay(List<Token> itIsOkPlayed, Player player, int nextPlayerCursor, Table table  );
-    //metodo que define la pieza a jugar por el jugador que utilice esta estrategia
 }
 public interface ITokensGenerator:IPrinteable
 {
@@ -18,9 +17,9 @@ public interface IEndRound:IPrinteable
 {
     (bool,List<Player>) IsEndRound(Game game);
 }
-public interface IFirstPlayer:IPrinteable// define las distintas formas de empezar el juego
+public interface IFirstPlayer:IPrinteable
 {
-    int IndexFirstPlayer(Game game);// llama al primer jugador a jugar
+    int IndexFirstPlayer(Game game);
 }
 public interface IScoreCalculator:IPrinteable
 {
@@ -36,11 +35,11 @@ public interface IMove:IPrinteable
 }
 public interface IActionModeratorToAdd:IPrinteable
 {
-    List<Token> TokensToAddThatItIsOk();// en el caso que las fichas se puedan jugar en cualquier momento del juego
+    List<Token> TokensToAddThatItIsOk();
 }
 public interface IActionModeratorToSub:IPrinteable
 {
-    List<Token> TokensToSubThatItIsNotOk();// en el caso que las fichas no se puedan jugar en juego
+    List<Token> TokensToSubThatItIsNotOk();
 }
 public interface IStep:IPrinteable
 {

@@ -53,7 +53,7 @@ public class ClassicEndRound : IEndRound
 }
 public class ClassicEndGame : IEndGame
 {
-    public (bool,List<Player>) IsEndGame(Game game)//revisar el metodo el ultimo false
+    public (bool,List<Player>) IsEndGame(Game game)
     {
         return game.IsEndRound_;
     }

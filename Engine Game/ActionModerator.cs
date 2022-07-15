@@ -13,7 +13,7 @@ public class DoubleWhiteActionToAdd : IActionModeratorToAdd
         return TokensToAdd;
     }
 }
-public class ClassicActionToAdd : IActionModeratorToAdd// implementacion de la interface
+public class ClassicActionToAdd : IActionModeratorToAdd
 {
     public string Print()
     {

@@ -1,5 +1,5 @@
 ﻿namespace Project;
-public class Generator_9_Variant : ITokensGenerator//genera la cantidad de piezas del juego en base a una cantidad  determinada de valores
+public class Generator_9_Variant : ITokensGenerator
 {
     public List<Token> Generated()
     {
@@ -19,7 +19,7 @@ public class Generator_9_Variant : ITokensGenerator//genera la cantidad de pieza
         return "Double Nine";
     }
 }
-public class Generator_6_Variant : ITokensGenerator//genera la cantidad de piezas del juego en base a una cantidad  determinada de valores
+public class Generator_6_Variant : ITokensGenerator
 {
     public List<Token> Generated()
     {

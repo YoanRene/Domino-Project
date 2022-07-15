@@ -46,7 +46,7 @@ public class BotagordaStrategy : IStrategy
     }
 }
 
-public class IntelligentBotagordaStrategy : IStrategy//implementacion de la interface
+public class IntelligentBotagordaStrategy : IStrategy
 {
     public string Print()
     {
