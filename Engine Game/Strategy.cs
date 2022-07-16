@@ -136,7 +136,7 @@ public class IntelligentStrategy : IStrategy
         // [5]=(0,7)
         // [6]=(0,7)
         //Aqui añadimos las estadisticas de lo que ha ocurrido hasta el momento a statsAux 
-        Dictionary<int, (int, int)> statsAux = table.Stats;
+        Dictionary<int, (int, int)> statsAux = Clone(table.Stats);
         //y actualizamos stats aux con las fichas que ademas tengo para hacer mas preciso
         //la probabilidad
         for (int i = 0; i < player.Hand.Count; i++)
@@ -167,4 +167,13 @@ public class IntelligentStrategy : IStrategy
         }
         return itIsOkPlayed[indexAux];
     }
-}
+    public Dictionary<int, (int, int)> Clone(Dictionary<int, (int, int)> dictionary)
+    {
+        Dictionary<int, (int, int)> clone = new Dictionary<int, (int, int)>();
+        foreach (var item in dictionary)
+        {
+            clone[item.Key] = item.Value;
+        }
+        return clone;
+    }
+} 
