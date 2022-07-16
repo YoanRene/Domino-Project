@@ -20,12 +20,12 @@ namespace Visual_Interface
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("How many players do you want?");
             Console.ResetColor();
-            Console.WriteLine(" (1 <= x <= 8)");
+            Console.WriteLine(" (1 <= x <= 4)");
 
             string key = Console.ReadLine();
             bool isOkKey = false;
 
-            for (int i = 1; i <= 8; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 if (key == i.ToString())
                 {
