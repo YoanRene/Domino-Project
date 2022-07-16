@@ -3,7 +3,7 @@
 ### Requisitos
 - net 6.0
 - Windows o Linux
-### Como ejecutar la aplicación?
+### Cómo ejecutar la aplicación?
 Abrir archivo en la carpeta del proyecto Visual Interface\bin\Debug\net6.0\Visual Interface.exe
 También tiene la opción de ejecutarlo por los métodos tradicionales pues es una aplicación de consola,
 solo se debe establecer como Startup Project a Visual Interface
