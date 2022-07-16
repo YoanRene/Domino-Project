@@ -6,7 +6,12 @@ public class ClassicDistributionTen : ObjectWithRandom,IDistribution
     {
         return "Classic";
     }
-
+    /// <summary>
+    /// Distribucion clasica aleatoria de fichas
+    /// </summary>
+    /// <param name="tokens"></param> fichas a repartir
+    /// <param name="players"></param> jugadores a los que repartir
+    /// <param name="count"></param> cantidad de fichas que se desea repartir a cada uno
     public void ToDistribute(List<Token> tokens,List<Player> players,int count)
     {
         for (int i = 0; i < players.Count; i++)
@@ -27,7 +32,13 @@ public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
     {
         return "Doubles To Trash";
     }
-
+    /// <summary>
+    /// Se distribuye normal y en caso de tocarle a un jugador 5 o mas dobles 
+    /// se le permite botar estos y volver a repartir
+    /// </summary>
+    /// <param name="tokens"></param>
+    /// <param name="players"></param>
+    /// <param name="count"></param>
     public void ToDistribute(List<Token> tokens,List<Player> players,int count)
     {
         ClassicDistributionTen classicDistribution = new();
@@ -50,7 +61,13 @@ public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
             }
         }
     }
-
+    /// <summary>
+    /// Metodo auxiliar de Double To Trash para la distribucion del jugador que bota
+    /// los dobles en caso de tener 5 o mas
+    /// </summary>
+    /// <param name="tokens"></param>
+    /// <param name="player"></param>
+    /// <param name="count"></param>
     void ToDistributeRandomForOne(List<Token> tokens,Player player,int count)
     {
         for (int i = 0; i < count; i++)

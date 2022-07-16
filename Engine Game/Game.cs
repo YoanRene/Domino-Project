@@ -1,9 +1,9 @@
 ﻿namespace Project;
 public class Game
 {
-    public int CountPasses { get; private set; } = 0;
-    public List<string> Log { get; private set; } = new();
-    public int Cursor { get; private set; } = -1;
+    public int CountPasses { get; private set; } = 0; //cantidad total de pases en el juego
+    public List<string> Log { get; private set; } = new(); //El historial de todo lo que ocurre en el juego
+    public int Cursor { get; private set; } = -1; 
     public IDistribution Distribution { get; }
     public IEndGame EndGame { get; }
     public (bool,List<Player>) IsEndRound_ { get; private set; } = (false,new List<Player>());
@@ -36,6 +36,12 @@ public class Game
         Generator = generator;
         Table_ = new Table(Generator);
     }
+    /// <summary>
+    /// Es donde ocurre el proceso ciclico del juego, la retroalimentacion misma
+    /// hasta que este se de por concluido
+    /// </summary>
+    /// <param name="strategy"></param>
+    /// <returns></returns>
     public bool Play(IStrategy strategy)
     {
         IsEndRound_ = EndRound.IsEndRound(this);
@@ -79,6 +85,11 @@ public class Game
         for (int i = 0; i < Players.Count; i++)
             Players[i].Hand.Clear();
     }
+    /// <summary>
+    /// Metodo auxiliar para no repetir codigo innecesario en el metodo anterior
+    /// respetando el princio DRY
+    /// </summary>
+    /// <param name="strategy"></param>
     public void BasicPlay(IStrategy strategy)
     {
         Player currentPlayer = Players[Cursor];

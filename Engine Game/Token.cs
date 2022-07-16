@@ -10,6 +10,9 @@ public class Token:IEquatable<Token>
         Right = right;
         IsDouble = Left == Right;
     }
+    /// <summary>
+    /// Permite girar la ficha para acomodarse a la mesa
+    /// </summary>
     public void ToTurn()
     {
         int temp = Left;
@@ -20,7 +23,11 @@ public class Token:IEquatable<Token>
     {
         return "[" + this.Left + "/" + this.Right + "]";
     }
-
+    /// <summary>
+    /// Determina si una ficha es igual a otra
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     public bool Equals(Token? other)
     {
         return (Left == other.Left && Right == other.Right) ||

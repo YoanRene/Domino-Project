@@ -1,6 +1,10 @@
 namespace Project;
 public class Table
 {
+    /// <summary>
+    /// estas son las estadisticas que hacen que el jugador inteligente sea
+    /// preciso a la hora de tomar decisiones
+    /// </summary>
     public Dictionary<int,(int,int)> Stats { get; }
     public bool IsStart { get { return TokensInGame.Count == 0; } }
     public List<Token> TokensInGame { get; set; } = new();
@@ -20,6 +24,10 @@ public class Table
         Stats = generator.Stats();
     }
 
+    /// <summary>
+    /// Pone la ficha en la mesa (empatar caras)
+    /// </summary>
+    /// <param name="token"></param> ficha a poner
     public void Eject(Token token)
     {
         bool hasBeenTurned = false;
@@ -51,14 +59,26 @@ public class Table
             Eject(token, ref hasBeenTurned);
         }
     }
+    /// <summary>
+    /// La pone a la izquierda de la mesa
+    /// </summary>
+    /// <param name="piece"></param>
     public void ToLeft(Token piece)
     {
         TokensInGame.Insert(0, piece);
     }
+    /// <summary>
+    /// La pone a la derecha de la mesa
+    /// </summary>
+    /// <param name="piece"></param>
     public void ToRight(Token piece)
     {
         TokensInGame.Add(piece);
     } 
+    /// <summary>
+    /// Imprime la mesa actual
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         string toString = "";
