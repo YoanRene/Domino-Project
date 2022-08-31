@@ -4,7 +4,7 @@
 - net 6.0
 - Windows
 ### Cómo ejecutar la aplicación?
-Después de clonar el repositorio ejecutar la consola en la dirección del mismo
+Después de clonar el repositorio ejecutar la consola en la dirección del mismo, 
 ejecutar el comando ` dotnet build ` , y una vez ejecutado 
 abrir archivo en la carpeta del proyecto Visual Interface\bin\Debug\net6.0\Visual Interface.exe
 ### Instrucciones de Uso
