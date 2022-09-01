@@ -4,7 +4,7 @@
 - net 6.0
 - Windows o Linux
 ### Cómo ejecutar la aplicación?
-Despues de ser clonado ,abrir la consola del sistema en la dirección donde se clonó y ejecutar los siguientes comandos:
+Despues de ser clonado, abrir la consola del sistema en la dirección donde se clonó y ejecutar los siguientes comandos:
 - ` cd Visual Interface `
 - ` dotnet build `
 - ` dotnet run `
