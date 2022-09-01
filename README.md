@@ -5,7 +5,7 @@
 - Windows o Linux
 ### Cómo ejecutar la aplicación?
 Después de ser clonado, abrir la consola del sistema en la dirección donde se clonó y ejecutar los siguientes comandos:
-- ` cd Visual Interface `
+- ` cd "Visual Interface" `
 - ` dotnet build `
 - ` dotnet run `
 ### Instrucciones de Uso
