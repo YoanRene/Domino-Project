@@ -3,7 +3,7 @@ public class DoubleWhiteActionToAdd : IActionModeratorToAdd
 {
     public string Print()
     {
-        return "Double White is a Valid Token always";
+        return "Double White is a Valid Token always (Literal)";
     }
     /// <summary>
     /// establece que la ficha del doble blanco sea permitida en cualquier momento del juego

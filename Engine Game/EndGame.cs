@@ -20,7 +20,7 @@ public class TwicePassesEndGame : IEndGame
 
     public string Print()
     {
-        return "Twice Passes";
+        return "Twice Passes (En caso de que alguien se pase dos veces seguidas)";
     }
 }
 public class ClassicEndRound : IEndRound
@@ -108,6 +108,6 @@ public class ChickenEndGame : IEndGame
 
     public string Print()
     {
-        return "Crazy Chicken";
+        return "Crazy Chicken (Consiste en que en el momento de que alguno de los jugadores alcance una puntuación final de 100 o más se  acaba el juego y todos los jugadores que cumplan con esto y sus compañeros de equipo en caso de tener, no serán considerados ganadores de la partida ,el resto sí)";
     }
 }

@@ -36,6 +36,6 @@ public class ChangeDirectionWithPassStep : IStep
 
     public string Print()
     {
-        return "Change Direction With Pass";
+        return "Change Direction With Pass (Cambia el sentido del juego por cada pase en el juego)";
     }
 }

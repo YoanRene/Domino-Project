@@ -30,7 +30,7 @@ public class DoublesToTrashDistribution : ObjectWithRandom, IDistribution
 {
     public string Print()
     {
-        return "Doubles To Trash";
+        return "Doubles To Trash (En caso de que un judagor tenga mas de 5 dobles permitirle botar estos y volverele a repartir)";
     }
     /// <summary>
     /// Se distribuye normal y en caso de tocarle a un jugador 5 o mas dobles 

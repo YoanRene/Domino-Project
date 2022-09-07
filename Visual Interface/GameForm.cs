@@ -57,7 +57,7 @@ namespace Visual_Interface
 
             for (int i = 0; i < Game_.Players.Count; i++)
             {
-                Console.Write(Game_.Players[i].Name + ": ");
+                Console.Write(Game_.Players[i].Name + " Score: " +Game_.Players[i].ScoreGame+" ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 for (int j = 0; j < Game_.Players[i].Hand.Count; j++)
                 {

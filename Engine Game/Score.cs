@@ -21,7 +21,7 @@ public class ScoreCalculatorB : IScoreCalculator
 {
     public string Print()
     {
-        return "Doubles Have Double Puntuaction";
+        return "Doubles Have Double Puntuaction (Los dobles a la hora de sumar la puntuación final valen el doble)";
     }
 
     /// <summary>
